@@ -43,21 +43,23 @@
         <input type="hidden" name="petId" th:value="${pet.id}" />
         <button
           th:with="text=${visit['new']} ? 'Add Visit' : 'Update Visit'"
-          class="btn btn-default" type="submit">Add Visit</button>
+          class="btn btn-default" type="submit" th:text="${text}">Add Visit</button>
       </div>
     </div>
   </form>
 
   <br />
-  <b>Previous Visits</b>
+  <b>All pet visits</b>
   <table class="table table-striped">
     <tr>
       <th>Date</th>
       <th>Description</th>
+      <th>Veterinarian</th>
     </tr>
     <tr th:if="${!visit['new']}" th:each="visit : ${pet.visits}">
       <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
       <td th:text=" ${visit.description}"></td>
+      <td th:text=" ${visit.vet}"></td>
     </tr>
   </table>
 

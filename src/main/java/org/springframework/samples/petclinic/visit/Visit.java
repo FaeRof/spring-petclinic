@@ -49,13 +49,7 @@ public class Visit extends BaseEntity {
 	@JoinColumn(name = "vet_id")
 	private Vet vet;
 
-	public void setVet(Vet vet) {
-		this.vet = vet;
-	}
 
-	public Vet getVet() {
-		return vet;
-	}
 
 	/**
 	 * Creates a new instance of Visit for the current date
@@ -88,4 +82,11 @@ public class Visit extends BaseEntity {
 		this.petId = petId;
 	}
 
+	public void setVet(Vet vet) {
+		this.vet = vet;
+	}
+
+	public Vet getVet() {
+		return vet;
+	}
 }

@@ -44,6 +44,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 class VisitController {
 
+	private static final String VIEWS_VISIT_CREATE_OR_UPDATE_FORM = "pets/createOrUpdateVisitForm";
+
 	private final VisitRepository visits;
 
 	private final PetRepository pets;
@@ -51,11 +53,6 @@ class VisitController {
 	public VisitController(VisitRepository visits, PetRepository pets) {
 		this.visits = visits;
 		this.pets = pets;
-	}
-
-	@ModelAttribute("vets")
-	public Collection<Vet> vetCollection(){
-		return this.visits.findVetCollection();
 	}
 
 	@InitBinder("visit")
@@ -83,17 +80,22 @@ class VisitController {
 		return visit;
 	}
 
+	@ModelAttribute("vets")
+	public Collection<Vet> vetCollection(){
+		return this.visits.findVet();
+	}
+
 	// Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
 	@GetMapping("/owners/*/pets/{petId}/visits/new")
 	public String initNewVisitForm(@PathVariable("petId") int petId, Map<String, Object> model) {
-		return "pets/createOrUpdateVisitForm";
+		return VIEWS_VISIT_CREATE_OR_UPDATE_FORM;
 	}
 
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is called
 	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
 	public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
 		if (result.hasErrors()) {
-			return "pets/createOrUpdateVisitForm";
+			return VIEWS_VISIT_CREATE_OR_UPDATE_FORM;
 		}
 		else {
 			this.visits.save(visit);
@@ -105,14 +107,14 @@ class VisitController {
 	public String initUpdateVisitForm(@PathVariable("visitId") int visitId, ModelMap model){
 		Visit visit = this.visits.findById(visitId);
 		model.addAttribute(visit);
-		return "pets/createOrUpdateVisitForm";
+		return VIEWS_VISIT_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/{visitId}/edit")
 	public String processUpdateVisitForm(@Valid Visit visit, BindingResult result,
 										 @PathVariable("visitId") int visitId){
 		if (result.hasErrors()){
-			return "pets/createOrUpdateVisitForm";
+			return VIEWS_VISIT_CREATE_OR_UPDATE_FORM;
 		}
 		else {
 			visit.setId(visitId);

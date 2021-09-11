@@ -40,7 +40,7 @@ public interface VisitRepository extends Repository<Visit, Integer> {
 
 	@Query("SELECT vet FROM Vet vet ORDER BY vet.name")
 	@Transactional(readOnly = true)
-	List<Vet> findVetCollection();
+	List<Vet> findVet();
 	/**
 	 * Save a <code>Visit</code> to the data store, either inserting or updating it.
 	 * @param visit the <code>Visit</code> to save

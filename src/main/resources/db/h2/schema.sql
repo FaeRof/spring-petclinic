@@ -58,7 +58,8 @@ CREATE TABLE visits (
   pet_id      INTEGER NOT NULL,
   visit_date  DATE,
   description VARCHAR(255),
-  vet_id      INTEGER NOT NULL
+  vet_id      INTEGER NOT NULL,
+  active      BIT DEFAULT NULL
 );
 ALTER TABLE visits ADD CONSTRAINT fk_visits_pets FOREIGN KEY (pet_id) REFERENCES pets (id);
 ALTER TABLE visits ADD CONSTRAINT fk_visits_vets FOREIGN KEY (vet_id) REFERENCES vets (id);

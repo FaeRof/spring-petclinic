@@ -28,11 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Juergen Hoeller
@@ -107,6 +103,7 @@ class VisitController {
 	public String initUpdateVisitForm(@PathVariable("visitId") int visitId, ModelMap model){
 		Visit visit = this.visits.findById(visitId);
 		model.addAttribute(visit);
+		visit.setActive(null);
 		return VIEWS_VISIT_CREATE_OR_UPDATE_FORM;
 	}
 
@@ -124,9 +121,11 @@ class VisitController {
 	}
 
 	@GetMapping("/owners/{ownerId}/pets/{petId}/visits/{visitId}")
-	public String processDeleteVisit(@PathVariable("visitId") int visitId){
-		visits.deleteById(visitId);
+	public String initUpdateVisit(@PathVariable("visitId") int visitId, ModelMap model){
+		Visit visit = this.visits.findById(visitId);
+		model.addAttribute(visit);
+		visit.setActive(true);
+		this.visits.save(visit);
 		return "redirect:/owners/{ownerId}";
 	}
-
 }

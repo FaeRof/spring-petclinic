@@ -49,7 +49,8 @@ public class Visit extends BaseEntity {
 	@JoinColumn(name = "vet_id")
 	private Vet vet;
 
-
+	@Column(name = "active")
+	private Boolean active;
 
 	/**
 	 * Creates a new instance of Visit for the current date
@@ -88,5 +89,13 @@ public class Visit extends BaseEntity {
 
 	public Vet getVet() {
 		return vet;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 }

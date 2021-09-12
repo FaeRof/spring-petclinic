@@ -103,7 +103,6 @@ class VisitController {
 	public String initUpdateVisitForm(@PathVariable("visitId") int visitId, ModelMap model){
 		Visit visit = this.visits.findById(visitId);
 		model.addAttribute(visit);
-		visit.setActive(null);
 		return VIEWS_VISIT_CREATE_OR_UPDATE_FORM;
 	}
 

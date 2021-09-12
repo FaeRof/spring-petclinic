@@ -78,9 +78,7 @@
               <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}" ></td>
               <td th:text="${visit?.description}"></td>
               <td th:text="${visit?.vet}"></td>
-              <td><a
-                th:href="@{{ownerId}/pets/{petId}/visits/{visitId}/edit(ownerId=${owner.id},petId=${pet.id}, visitId=${visit.id})}">Edit
-              </a></td>
+              <td>X</td>
               <td>CANCELED</td>
             </tr>
             <tr>

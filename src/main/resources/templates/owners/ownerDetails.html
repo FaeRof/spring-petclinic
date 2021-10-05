@@ -73,6 +73,9 @@
               <td><a
                 th:href="@{{ownerId}/pets/{petId}/visits/{visitId}(ownerId=${owner.id},petId=${pet.id}, visitId=${visit.id})}">Cancel
               </a></td>
+              <td><a
+                th:href="@{{ownerId}/pets/{petId}/visits/{visitId}/delete(ownerId=${owner.id},petId=${pet.id}, visitId=${visit.id})}">Delete
+              </a></td>
             </tr>
             <tr th:each="visit : ${pet.visits} " th:if="${visit.active != null}" th:style="'color: red;'">
               <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}" ></td>
@@ -80,6 +83,9 @@
               <td th:text="${visit?.vet}"></td>
               <td>X</td>
               <td>CANCELED</td>
+              <td><a
+                th:href="@{{ownerId}/pets/{petId}/visits/{visitId}/delete(ownerId=${owner.id},petId=${pet.id}, visitId=${visit.id})}">Delete
+              </a></td>
             </tr>
             <tr>
               <td><a

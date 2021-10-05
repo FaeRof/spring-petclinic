@@ -128,7 +128,7 @@ class VisitController {
 		return "redirect:/owners/{ownerId}";
 	}
 
-	@GetMapping("/owners/{ownerId}/pets/{petId}/visits/{visitId}")
+	@GetMapping("/owners/{ownerId}/pets/{petId}/visits/{visitId}/delete")
 	public String processDeleteVisit(@PathVariable("visitId") int visitId){
 		visits.deleteById(visitId);
 		return "redirect:/owners/{ownerId}";
